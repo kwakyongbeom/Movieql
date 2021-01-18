@@ -1,12 +1,14 @@
-const yongbeom={ //새로운 타입의 객체를 설정 
-    name:"yongbeom",
-    age:26,
-    gender:"male"
-};
+const MovieDB = require('../DB');
+const movies=MovieDB.movies;
+
 
 const resolvers={ //Query를 해곃하는 즉, 해당 Query를 받으면 동작할 Callback 함수 같은 느낌 
   Query:{ //Query이고 
-      person: () => yongbeom //person이란 키가 왔을 때 yongbeom 객체를  리턴 한다 
+      movies: () => movies,
+      movie: (_,{id}) => MovieDB.getById(id) //Movie으로 요청 시 그 argument인 id를 받아 getById에 넘겨준다 
+  },
+  Mutation:{ //Mutation 추가  
+    addMovie:(_,{name,gender}) => MovieDB.addMovie(name,gender)  //name과 gender를 입력받음
   }
 };
 
@@ -15,3 +17,4 @@ const resolvers={ //Query를 해곃하는 즉, 해당 Query를 받으면 동작�
 module.exports={
     resolvers:resolvers
 };
+

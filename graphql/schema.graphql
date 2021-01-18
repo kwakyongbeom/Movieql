@@ -1,4 +1,5 @@
-type yongbeom{
+type Movie{
+    id:Int!
     name:String! 
     age:Int! 
     gender:String!
@@ -6,5 +7,10 @@ type yongbeom{
 
 
 type Query{ 
-    person:yongbeom
+    movies:[Movie]!
+    movie(id:Int!):Movie   
+}
+
+type Mutation{ 
+    addMovie(name:String!,gender:String!):Movie!
 }
